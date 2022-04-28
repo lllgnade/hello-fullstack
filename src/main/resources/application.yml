@@ -9,4 +9,4 @@ spring:
 
 mybatis:
   # 마이바티스 vo 패키지 위치 설정
-  type-aliases-package: com.api.rest.vo
+  type-aliases-package: com.hello.fullstack.vo

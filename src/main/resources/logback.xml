@@ -19,7 +19,7 @@
             <pattern>${LOG_PATTERN}</pattern>
         </encoder>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <fileNamePattern>${LOG_DIR}/%d{yyyy-MM, aux}/${LOG_NAME}-%d{yyyy-MM-dd}%i.log</fileNamePattern> <!--%i 필수-->
+            <fileNamePattern>${LOG_DIR}/%d{yyyy-MM, aux}/${LOG_NAME}-%d{yyyy-MM-dd}[%i].log</fileNamePattern> <!--%i 필수-->
             <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
                 <maxFileSize>1GB</maxFileSize> <!-- 한 파일의 최대 용량 (거의 안 씀) -->
             </timeBasedFileNamingAndTriggeringPolicy>
@@ -27,9 +27,8 @@
         </rollingPolicy>
     </appender>
 
-
     <!--특정 로거 설정-->
-    <logger name="com.api.rest.mapper.PostMapper" level="DEBUG">
+    <logger name="com.hello.fullstack.mapper.UserMapper" level="DEBUG">
         <appender-ref ref="STDOUT"/>
     </logger>
 
