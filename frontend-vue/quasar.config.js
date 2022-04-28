@@ -77,11 +77,14 @@ module.exports = configure(function (ctx) {
 
     // Full list of options: https://v2.quasar.dev/quasar-cli-webpack/quasar-config-js#Property%3A-devServer
     devServer: {
-      // 프록시 설정, 백엔드, 프론트엔드...
+      // 프록시 설정, 프론트엔드 -> 백엔드를 연결.
+
       proxy: {
-        "/rest": {
-          //프리픽스. 레스트 api와 겹치지 않게.
+        "/api": {
+          // /api로 시작되는 주소는 프록시가 가로채서 target으로 연결해준다.
+          // vue의 route 주소는 백엔드 레스트 api 주소와 겹치지 않게 하기.
           target: "http://localhost:8080",
+          // COS 에러를 막기 위한 설정
           changeOrigin: true,
         },
       },

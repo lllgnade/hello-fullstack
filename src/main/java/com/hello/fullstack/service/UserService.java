@@ -15,7 +15,7 @@ public class UserService {
     @Autowired
     private UserMapper userMapper;
 
-    public List<UserVo> selectAll() {
-        return userMapper.selectAll();
+    public List<UserVo> getUserList() {
+        return userMapper.getUserList();
     }
 }

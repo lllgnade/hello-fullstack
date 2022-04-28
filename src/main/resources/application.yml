@@ -7,6 +7,5 @@ spring:
     username: tester
     password: Tester123!@#
 
-mybatis:
-  # 마이바티스 vo 패키지 위치 설정
-  type-aliases-package: com.hello.fullstack.vo
+logging:
+    config: classpath:logback.xml

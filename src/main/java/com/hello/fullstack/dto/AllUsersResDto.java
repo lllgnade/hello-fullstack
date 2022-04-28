@@ -9,6 +9,6 @@ import java.util.List;
 @Data
 @JsonInclude(JsonInclude.Include.NON_NULL)      // 값이 NULL인 항목을 제외하고 json 매핑
 public class AllUsersResDto {
-    private int resultCode;
+    private int resultCode = ResultCode.SUCCESSFUL.value();
     private List<UserVo> userList;
 }

@@ -8,27 +8,24 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
 @RestController
 @Slf4j
-@RequestMapping("api")
 public class UserController {
 
     @Autowired
     private UserService userService;
 
-    @GetMapping("user")
-    public AllUsersResDto allUsers(){
+    @GetMapping("/api/user")
+    public AllUsersResDto allUsers(){ //getUserList UserListRespDto
         AllUsersResDto resDto = new AllUsersResDto();
         try {
             List<UserVo> userList;
-            userList = userService.selectAll();
+            userList = userService.getUserList();
             resDto.setUserList(userList);
-            resDto.setResultCode(ResultCode.SUCCESSFUL.value());
         } catch (DataAccessException e) {
             log.error("Exception Occurred.", e);
             resDto.setResultCode(ResultCode.UNKNOWN_DATABASE_ERROR.value());
