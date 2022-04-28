@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- 60초마다 설정 파일의 변경을 확인 하여 변경시 갱신 -->
+<configuration scan="true" scanPeriod="60 seconds">
+
+    <property name="LOG_DIR" value="log/"/>
+    <property name="LOG_NAME" value="fullstack"/>
+    <property name="LOG_PATTERN" value="%d{yyyy-MM-dd HH:mm:ss.SSS} %-5level [%12t] %40logger{40} : %msg%n"/>
+
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} %highlight(%-5level) [%12t] %40logger{40} : %msg%n</pattern>
+        </encoder>
+    </appender>
+    <!--<pattern>[%d{HH:mm:ss.SSS}] %green([%thread]) %c.%M:%line  </pattern>-->
+    <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${LOG_DIR}/${LOG_NAME}.log</file> <!-- 파일을 저장할 경로를 정한다 -->
+        <encoder>
+            <pattern>${LOG_PATTERN}</pattern>
+        </encoder>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${LOG_DIR}/%d{yyyy-MM, aux}/${LOG_NAME}-%d{yyyy-MM-dd}%i.log</fileNamePattern> <!--%i 필수-->
+            <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                <maxFileSize>1GB</maxFileSize> <!-- 한 파일의 최대 용량 (거의 안 씀) -->
+            </timeBasedFileNamingAndTriggeringPolicy>
+            <maxHistory>365</maxHistory> <!-- 한 파일의 최대 저장 기한 -->
+        </rollingPolicy>
+    </appender>
+
+
+    <!--특정 로거 설정-->
+    <logger name="com.api.rest.mapper.PostMapper" level="DEBUG">
+        <appender-ref ref="STDOUT"/>
+    </logger>
+
+    <!--루트 로거 설정-->
+    <root>
+        <level value="INFO"/>
+        <appender-ref ref="STDOUT"/>
+        <appender-ref ref="FILE"/>
+    </root>
+
+</configuration>
